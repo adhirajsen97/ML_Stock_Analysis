@@ -3,9 +3,9 @@ import os, requests;
 from os import walk
 from pathlib import Path
 
-find = Path('symbols_valid_meta.csv')
-path = find.parent.absolute()
-path = str(path) + "/StockData/"
+path = Path(__file__).parents[2]
+
+
 
 
 
@@ -13,22 +13,21 @@ path = str(path) + "/StockData/"
 
 def main():
 
-	
-
 	#set path locally
-	stock_path = path + "stocks/"
+	stock_path = str(path) + "/StockData/stocks"
 	print(stock_path)
 
-	# read all csv file names from stocks folder
-	_, _, stock_names = next(walk(stock_path))
+	stock_names = os.listdir(stock_path)
+	#print(stock_names)
 	
 
 	# read metadata csv
-	meta = pd.read_csv(path + "/StockData/symbols_valid_meta.csv")
-	print(meta.head(5))   # print Metadata head
+	#meta = pd.read_csv(path + "symbols_valid_meta.csv")
+	#print(meta.head(5))   # print Metadata head
 
-	comp_acronym = meta["Symbol"].tolist()
 
+	#comp_acronym = meta["Symbol"].tolist()
+	'''
 	# create pd series of dates specified from start to end
 	start_date = '2010-01-22'
 	end_date = '2020-01-26'
@@ -37,7 +36,7 @@ def main():
 	#create a df with index start and end date specified
 	df = pd.DataFrame(index=dates)
 	#print(df)
-
+	'''
 
 
 
