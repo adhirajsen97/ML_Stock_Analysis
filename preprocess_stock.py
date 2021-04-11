@@ -2,11 +2,10 @@ import pandas as pd
 import os, requests;
 from os import walk
 from pathlib import Path
+import yfinance as yf
+
 
 path = Path(__file__).parents[2]
-
-
-
 
 
 
@@ -14,19 +13,44 @@ path = Path(__file__).parents[2]
 def main():
 
 	#set path locally
-	stock_path = str(path) + "/StockData/stocks"
-	print(stock_path)
+	stock_path = str(path) + "/StockData/stocks/"
 
+	#Get a list of files from stocks directory
 	stock_names = os.listdir(stock_path)
-	#print(stock_names)
+
+	
 	
 
 	# read metadata csv
-	#meta = pd.read_csv(path + "symbols_valid_meta.csv")
-	#print(meta.head(5))   # print Metadata head
+	meta = pd.read_csv(str(path) + "/StockData/symbols_valid_meta.csv")
+	#print(meta)   # print Metadata head
 
 
-	#comp_acronym = meta["Symbol"].tolist()
+	comp_acronym = meta["Symbol"].tolist()
+
+	'''
+	stocklist = pd.DataFrame()
+	for i in comp_acronym:
+
+		#print( str(comp_acronym.index(i)) + str(' : ') + i, sep=',', end=',', flush=True)
+		
+		file = str(i) + ".csv"
+		if file in stock_names:
+			stock = pd.read_csv(stock_path+file)
+		else:
+			continue
+			
+
+		if len(stock) == 0 : 
+			None
+		else:
+			stock["Name"] = i 
+			stocklist = stocklist.append(stock, sort = False)
+	
+	print(stocklist.head())
+	'''
+
+	
 	'''
 	# create pd series of dates specified from start to end
 	start_date = '2010-01-22'
